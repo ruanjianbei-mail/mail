@@ -1,14 +1,22 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-
+#include "writemail.h"
+#include "mailuser.h"
+#include "MailModel.h"
+#include "DatabaseManager.h"
 int main(int argc, char *argv[])
 {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-#endif
     QGuiApplication app(argc, argv);
+    qmlRegisterType<writeMail>("writeMail", 1, 0, "WriteMail");
+    qmlRegisterType<mailUser>("mailUser", 1, 0, "MailUser");
+
+    DatabaseManager::instance();
+
+    //register MailModel for QML
+    qmlRegisterType<MailModel>("Mail", 1, 0, "MailModel");
 
     QQmlApplicationEngine engine;
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(
         &engine,
@@ -19,6 +27,7 @@ int main(int argc, char *argv[])
                 QCoreApplication::exit(-1);
         },
         Qt::QueuedConnection);
+
     engine.load(url);
 
     return app.exec();

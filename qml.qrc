@@ -1,6 +1,12 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>Actions.qml</file>
+        <file>writeMail.qml</file>
+        <file>logo.png</file>
+        <file>mail.js</file>
+        <file>signIn.qml</file>
+        <file>sendList.qml</file>
+        <file>mailMsg.qml</file>
+        <file>mailMsgs.qml</file>
     </qresource>
 </RCC>
